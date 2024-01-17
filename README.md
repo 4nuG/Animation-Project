@@ -38,6 +38,7 @@ The images used in this project were represented as large matrices of coordinate
 - Motion 1: Mouse flies out of the pot
 - Motion 2: Witch and mouse chase each other
 - Motion 3: Mouse and witch run off the screen
+My code is saved as witch_animation.m in the repo. 
 
 ### Part 3: Jake
 - Both characters run left on the screen
