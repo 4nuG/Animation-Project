@@ -75,11 +75,65 @@ The project utilizes several MATLAB functions for transformations and animations
 ### Morph Function
 function [A, B, M] = morph(A, B, M)
 
+```matlab
+function [A, B, M] = morph(A, B, M)
+% Morph input A into B with an option to translate with an additional matrix M.
+% If you don't intend to translate, make M the identity matrix.
+
+    N = A;
+    [Br, Bc] = size(B);
+    [Ar, Ac] = size(A);
+
+    if (Bc < Ac)
+        Dif = abs(Ac - Bc);
+        Z = zeros(3, Dif);
+        B = [B Z];
+    else
+        Dif = abs(Bc - Ac);
+        Z = zeros(3, Dif);
+        A = [A Z];
+    end
+
+    for k = 0:1/20:1
+        P = (1 - k) * B + k * A;
+        P = M * P;
+        plot(P(1, :), P(2, :), '.')
+        pause(0.1);
+        plot(P(1, :), P(2, :), '.', 'color', 'w')
+    end
+end
+```
+
 - Morphs input A into B with the option to translate using an additional matrix M
 - If no translation is intended, set M as the identity matrix
 
 ### Translate Function
 function [newrat, A] = Move(N, A)
+
+```matlab
+function [newrat, A] = move(N, A)
+% Takes in a set of points and a matrix, moves it to the center,
+% multiplies by matrix, then moves back.
+
+    [Nr, Nc] = size(N);
+    Ax = 0;
+    Ay = 0;
+
+    for i = 1:Nc
+        Ax = Ax + N(1, i);
+        Ay = Ay + N(2, i);
+    end
+
+    Ax1 = Ax / Nc;
+    Ay1 = Ay / Nc;
+    N1 = [1 0 -Ax1; 0 1 -Ay1; 0 0 1] * N;
+    N2 = A * N1;
+    N3 = [1 0 Ax1; 0 1 Ay1; 0 0 1] * N2;
+    
+    A = A;  % Note: It seems A is not being modified in this function, you may want to check if this assignment is necessary.
+    newrat = N3;
+end
+```
 
 - Takes in a set of points and a matrix, moves it to the center, multiplies by the matrix, and moves back to the original position.
 
