@@ -137,4 +137,4 @@ end
 
 - Takes in a set of points and a matrix, moves it to the center, multiplies by the matrix, and moves back to the original position.
 
-Feel free to explore each contributor's section and the collaborative effort in creating this animated holiday story!
+Feel free to use this template and provided code to create your own animated holiday story!
